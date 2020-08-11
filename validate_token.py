@@ -28,7 +28,6 @@ def validate_token(id_token: str):
         if key_index == -1:
             # Public key not found in jwks.json
             return {
-                'error': True,
                 'success': False,
                 'message': 'Public key not found in jwks.json',
                 'data': None
@@ -43,7 +42,6 @@ def validate_token(id_token: str):
         if not public_key.verify(message.encode("utf8"), decoded_signature):
             # Signature verification failed
             return {
-                'error': True,
                 'success': False,
                 'message': 'Signature verification failed',
                 'data': None
@@ -56,21 +54,18 @@ def validate_token(id_token: str):
         if time.time() > claims['exp']:
             # Token is expired
             return {
-                'error': True,
                 'success': False,
                 'message': 'Token is expired',
                 'data': None
             }
 
         return {
-            'error': False,
             'success': True,
             'message': None,
             'data': claims
         }
     except Exception as e:
         return {
-            'error': True,
             'success': False,
             'message': str(e),
             'data': None

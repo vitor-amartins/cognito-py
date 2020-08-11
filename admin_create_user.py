@@ -32,14 +32,12 @@ def admin_create_user(email: str, name: str, client: botocore.client.BaseClient)
             MessageAction='SUPPRESS',
         )
         return {
-            'error': False,
             'success': True,
             'message': None,
             'data': response
         }
     except client.exceptions.UsernameExistsException as e:
         return {
-            'error': True,
             'success': False,
             'message': 'This username already exists',
             'data': None,
@@ -47,7 +45,6 @@ def admin_create_user(email: str, name: str, client: botocore.client.BaseClient)
 
     except Exception as e:
         return {
-            'error': True,
             'success': False,
             'message': str(e),
             'data': None

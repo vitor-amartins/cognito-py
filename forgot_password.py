@@ -12,14 +12,12 @@ def forgot_password(email: str, client: botocore.client.BaseClient):
             Username=email,
         )
         return {
-            'error': False,
             'success': True,
             'message': None,
             'data': response
         }
     except Exception as e:
         return {
-            'error': True,
             'success': False,
             'message': str(e),
             'data': None

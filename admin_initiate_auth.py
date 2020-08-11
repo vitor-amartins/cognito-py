@@ -17,14 +17,12 @@ def admin_initiate_auth(email: str, password: str, client: botocore.client.BaseC
             ClientId=os.environ['CLIENT_ID'],
         )
         return {
-            'error': False,
             'success': True,
             'message': None,
             'data': response,
         }
     except Exception as e:
         return {
-            'error': True,
             'success': False,
             'message': str(e),
             'data': None
